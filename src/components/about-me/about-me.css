@@ -1,0 +1,12 @@
+.about-me {
+    max-width: 1170px;
+    box-sizing: border-box;
+    padding: 0 15px 100px 15px;
+    width: 100%;
+}
+
+@media screen and (max-width: 611px){
+    .about-me {
+        padding: 0 15px 21px 15px;
+    }
+}

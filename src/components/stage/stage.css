@@ -1,0 +1,17 @@
+.stage {
+    width: 100%;
+    box-sizing: border-box;
+    font-size: 0;
+    text-align: center;
+
+    background-color: #303030;
+}
+
+.stage__text {
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 17px;
+
+    color: var(--color-text-main);
+    opacity: var(--opacity-secondary);
+}

@@ -1,0 +1,225 @@
+.techs {
+    max-width: 1280px;
+    box-sizing: border-box;
+    padding: 0 15px 100px 15px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    background-color: #272727;
+}
+
+.techs__title {
+    margin: 45px 0 0 0;
+
+    font-weight: normal;
+    font-size: 50px;
+    line-height: 58px;
+    letter-spacing: -0.04em;
+    text-align: center;
+
+    color: var(--color-text-main);
+    opacity: var(--opacity-normal);
+}
+
+.techs__text {
+    grid-area: techs-text;
+    padding: 0 0 14px 0;
+    text-align: center;
+}
+
+.techs__promo-main {
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 140%;
+
+    color: var(--color-text-main);
+    opacity: var(--opacity-normal);
+}
+
+.techs__promo-secondary {
+    display: inline-block;
+    margin: 0;
+
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 140%;
+
+    color: var(--color-text-main);
+    opacity: var(--opacity-secondary);
+}
+
+.techs__promo-secondary_type_mobile {
+    display: none;
+}
+
+.techs__landing-header {
+    max-width: 1140px;
+}
+
+.techs__content {
+    margin: 12px 0 0 0;
+    display: grid;
+    grid-template-columns:  repeat(7, max-content);
+    grid-template-rows: max-content max-content max-content;
+    grid-template-areas:    'techs-text techs-text techs-text techs-text techs-text techs-text techs-text'
+                            'placeholder1 placeholder1 tech-top1 tech-top2 tech-top3 placeholder2 placeholder2'
+                            'placeholder3 tech-bottom1 tech-bottom2 tech-bottom3 tech-bottom4 tech-bottom5 placeholder4';
+}
+
+.techs__tech {
+    width: 90px;
+    padding: 21px 0 22px 0;
+    margin: 15px 10px 0 0;
+    font-size: 0;
+    text-align: center;
+
+    background-color: #303030;
+    border-radius: 10px;
+}
+
+.techs__tech:last-child {
+    margin: 15px 0 0 0;
+}
+
+.techs__tech_position_one {
+    grid-area: tech-top1;
+}
+
+.techs__tech_position_two {
+    grid-area: tech-top2;
+}
+
+.techs__tech_position_three {
+    grid-area: tech-top3;
+}
+
+.techs__tech_position_four {
+    grid-area: tech-bottom1;
+}
+
+.techs__tech_position_five {
+    grid-area: tech-bottom2;
+}
+
+.techs__tech_position_six {
+    grid-area: tech-bottom3;
+}
+
+.techs__tech_position_seven {
+    grid-area: tech-bottom4;
+}
+
+.techs__tech_position_eight {
+    grid-area: tech-bottom5;
+}
+
+.techs__tech-text {
+    grid-area: text;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 17px;
+    letter-spacing: -0.04em;
+
+    color: var(--color-text-main);
+    opacity: var(--opacity-normal);
+}
+
+@media screen and (max-width: 768px){
+    .techs {
+        padding: 0 15px 93px 15px;;
+    }
+}
+
+@media screen and (max-width: 740px){
+    .techs__title {
+        font-size: 48px;
+    }
+}
+
+
+@media screen and (max-width: 600px){
+
+    .techs {
+        padding: 0 15px 100px 15px;;
+    }
+
+    .techs__title {
+        display: none;
+    }
+
+    .techs__text {
+        padding: 20px 0 10px 0;
+    }
+
+    .techs__promo-main {
+        font-size: 14px;
+    }
+
+    .techs__promo-secondary {
+        font-size: 14px;
+    }
+
+    .techs__promo-secondary_type_main {
+        display: none;
+    }
+
+    .techs__promo-secondary_type_mobile {
+        display: block;
+    }
+
+
+    .techs__content {
+        margin: 51px 0 0 0;
+        display: grid;
+        grid-template-columns:  repeat(4, min-content);
+        grid-template-rows: repeat(3, max-content);
+        grid-template-areas:    'tech-top3 tech-bottom4 tech-top2 tech-top1'
+                            'techs-text techs-text techs-text techs-text'
+                            'tech-bottom1 tech-bottom2 tech-bottom3 tech-bottom5';
+    }
+
+
+    .techs__tech {
+        margin: 10px 10px 0 0;
+    }
+
+    .techs__tech:nth-child(2) {
+        margin: 10px 0 0 0;
+    }
+
+    .techs__tech:last-child {
+        margin: 10px 0 0 0;
+    }
+
+}
+
+
+@media screen and (max-width: 440px){
+
+    .techs__title {
+        display: none;
+    }
+
+    .techs__content {
+        margin: 51px 0 0 0;
+        display: grid;
+        grid-template-columns:  repeat(3, min-content);
+        grid-template-rows: repeat(5, max-content);
+        grid-template-areas:    'tech-top3 placeholder placeholder'
+                            'tech-bottom4 tech-top2 tech-top1'
+                            'techs-text techs-text techs-text'
+                            'tech-bottom1 tech-bottom2 tech-bottom3'
+                            'placeholder2 placeholder2 tech-bottom5';
+    }
+
+    .techs__tech:nth-child(7) {
+        margin: 10px 0 0 0;
+    }
+
+    .techs__tech:nth-child(4) {
+        margin: 0;
+    }
+}
+

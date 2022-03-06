@@ -1,0 +1,32 @@
+.more {
+    width: 320px;
+    padding: 10px 0 9px 0;
+
+    font-size: 0;
+    text-align: center;
+
+    background-color: #2c2c2c;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.more:hover {
+    background-color: #343434
+}
+
+.more__text {
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 17px;
+
+    color: var(--color-text-main);
+    opacity: var(--opacity-normal);
+}
+
+@media screen and (max-width: 670px){
+    .more {
+        width: 240px;
+    }
+}

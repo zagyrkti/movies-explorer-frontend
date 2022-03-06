@@ -1,0 +1,148 @@
+/* TODO подумать насчет 550-700 */
+
+.about-project {
+    max-width: 1170px;
+    box-sizing: border-box;
+    padding: 0 15px 70px 15px;
+    width: 100%;
+}
+
+.about-project__content {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    grid-template-rows: auto;
+    grid-template-areas:    'timeline timeline timeline timeline timeline'
+                            'stages-title placeholder placeholder placeholder weeks-title'
+                            'stages text text text weeks';
+}
+
+.about-project__timeline {
+    margin: 42px 0 0 0;
+    display: flex;
+
+    grid-area: timeline;
+}
+
+.about-project__timeline-stage {
+    margin: 0 2px 0 0;
+    padding: 9px 0 10px 0;
+}
+
+.about-project__timeline-stage:last-child {
+    margin: 0;
+}
+
+.about-project__title{
+    justify-self: center;
+    margin: 20px 0 20px 0;
+
+    font-weight: normal;
+    font-size: 24px;
+    line-height: 29px;
+    letter-spacing: -0.04em;
+
+    opacity: var(--opacity-normal);
+}
+
+.about-project__title_type_stages-title {
+    grid-area: stages-title;
+}
+
+.about-project__title_type_weeks-title {
+    grid-area: weeks-title;
+
+}
+
+.about-project__stages {
+    grid-area: stages;
+}
+
+.about-project__weeks {
+    grid-area: weeks;
+}
+
+.about-project__stage {
+    margin: 0 0 10px 0;
+    padding: 9px 0 10px 0;
+}
+
+.about-project__stage:last-child {
+    margin: 0;
+}
+
+.about-project__text {
+    max-width: 541px;
+    max-height: 210px;
+    padding: 0 10px 0 20px;
+    margin: 0 10px 0 0;
+    grid-area: text;
+    justify-self: center;
+
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 140%;
+    overflow: auto;
+
+    opacity: var(--opacity-normal);
+}
+
+.custom-scroll::-webkit-scrollbar {
+    width: 8px;
+}
+.custom-scroll::-webkit-scrollbar-track {
+    background: #303030;
+}
+.custom-scroll::-webkit-scrollbar-thumb {
+    background: #1c1c1c;
+    border: 2px solid #303030;
+}
+
+@media screen and (max-width: 700px){
+
+    .about-project {
+        padding: 0 15px 100px 15px;
+    }
+
+    .about-project__content {
+        display: grid;
+        grid-template-columns: 1fr max-content;
+        grid-template-rows: repeat(5, max-content);
+        grid-template-areas:    'stages timeline'
+                            'stages-title timeline'
+                            'text timeline'
+                            'weeks-title timeline'
+                            'weeks timeline';
+        margin: 25px 0 0 0;
+    }
+
+    .about-project__timeline {
+        margin: 0 0 0 14px;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .about-project__timeline-stage {
+        margin: 0 0 2px 0;
+        padding: 0 9px 0 10px;
+        writing-mode: vertical-rl;
+        flex-grow: 1;
+    }
+
+    .about-project__text {
+        max-height: max-content;
+        font-size: 14px;
+        padding: 0;
+        margin: 0;
+        line-height: 140%;
+    }
+
+    .about-project__title_type_stages-title {
+        margin: 20px 0 18px 0;
+    }
+
+    /* TODO раскоментить после ревью, ошибка макета */
+    .about-project__title_type_weeks-title {
+        margin: 13px 0 20px 0;
+        /*margin: 13px 0 24px 0;*/
+    }
+}

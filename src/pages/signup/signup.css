@@ -1,0 +1,35 @@
+.signup {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 0;
+}
+
+
+.signup__form {
+    max-width: 396px;
+    width: 100%;
+    margin: 35px 0 0 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.signup__signx-button {
+    margin: 20px 20px 0 20px;
+    border-radius: 50px;
+}
+
+.signup__server-error {
+    padding: 17px 0 0 0;
+}
+
+.signup__redirect-call {
+    margin: 16px 0 0 0;
+}
+
+@media screen and (max-width: 436px){
+    .signup {
+        padding: 0 20px 0 20px;
+    }
+}

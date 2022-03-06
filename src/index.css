@@ -2,3 +2,12 @@
 
 /* fonts */
 @import url('vendor/fonts/inter/inter.css');
+
+/* css variables */
+@import url('vendor/variables.css');
+
+@import url('vendor/aspect-ratio/aspect-ratio.css');
+
+/** {
+  outline: 1px dashed blueviolet;
+}*/

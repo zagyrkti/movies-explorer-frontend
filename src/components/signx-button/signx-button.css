@@ -1,0 +1,41 @@
+.signx-button {
+    width: 100%;
+    padding: 13px 0 14px 0;
+    /*padding: 13px 0 15px 0;*/
+
+    border: none;
+    background-color: #E50914;
+    text-align: center;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+.signx-button:hover {
+    background-color: #d20914;
+}
+
+.signx-button_state_disabled {
+    pointer-events: none;
+    background-color: #7a7a7a;
+}
+
+/* TODO откатить фонт на 14 на время ревью */
+.signx-button__text {
+    width: 100%;
+
+    margin: 13px 0 14px 0;
+    font-weight: 500;
+    /*font-size: 14px;*/
+    /*line-height: 17px;*/
+    font-size: 15px;
+    line-height: 18px;
+
+    color: var(--color-text-main);
+}
+/* TODO убрать после ревью */
+@media screen and (max-width: 320px){
+    .signx-button__text {
+        font-size: 12px;
+        line-height: 15px;
+    }
+}

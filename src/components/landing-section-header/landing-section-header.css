@@ -1,0 +1,14 @@
+.landing-section-header {
+    padding: 63px 0 10px 0;
+    margin: 0;
+    width: 100%;
+
+    font-size: 22px;
+    line-height: 27px;
+    font-weight: normal;
+    letter-spacing: -0.04em;
+    color: var(--color-text-main);
+
+    opacity: var(--opacity-normal);
+    border-bottom: 1px solid #DADADA;
+}

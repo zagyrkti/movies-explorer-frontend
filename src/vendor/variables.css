@@ -1,0 +1,58 @@
+:root {
+    --opacity-prominent: 0.95;
+    --opacity-normal: 0.87;
+    --opacity-secondary: 0.6;
+
+    --font-family-main: 'Inter', sans-serif;
+/*
+    --font-size-body: 18px;
+    --font-size-button: 15px;
+    --font-size-caption: 14px;
+    --font-size-body-mob: 15px;
+    --font-size-menu: 14px;
+    --font-size-menu-header: 25px;
+    --font-size-tag: 10px;
+    --font-size-h1: 74px;
+    --font-size-h1-mob: 37px;
+    --font-size-h2: 23px;
+    --font-size-h3: 44px;
+    --font-size-number: 100px;
+    --font-size-clickable-mob: 12px;
+    --font-size-article_main: 23px;
+    --footer__help-button: 15px;
+
+    --line-height-body: 26px;
+    --line-height-button: 19px;
+    --line-height-caption: 19px;
+    --line-height-body-mob: 21px;
+    --line-height-menu: 17px;
+    --line-heignt-footer-menu: 18px;
+    --line-height-menu-header: 28px;
+    --line-height-tag: 13px;
+    --line-height-h1: 80px;
+    --line-height-h1-mob: 39px;
+    --line-height-h2: 30px;
+    --line-height-h3: 50px;
+    --line-height-number: 100px;
+    --line-height-article_main: 30px;
+    --line-height-clickable: 19px;
+
+    --letter-spacing-menu: 0.2px;*/
+
+    --color-bg: #1c1c1c;
+    --color-bg-secondary: #2c2c2c;
+    --color-text-main: #ffffff;
+    --color-state-active: #009927
+/*
+    --color-text-alt: #464646;
+    --color-accent: #224cff;
+    --color-accent-alt: #a7a6a6;
+    --color-button-hover: #e0e0e0;
+    --color-visited: #2e2468;
+    --color-error: #ff4e4e;
+    --color-light-blue: #c8d1ff;
+    --color-orange: #ff8585;
+    --color-yellow: #f8d162;
+    --color-green: #8cdd94;
+    --color-white: #ffffff;*/
+}

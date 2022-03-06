@@ -1,0 +1,43 @@
+.redirect-call {
+
+
+}
+
+.redirect-call__message {
+    display: inline-block;
+    margin: 0 6px 0 0;
+
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 17px;
+
+    color: var(--color-text-main);
+    opacity: var(--opacity-secondary);
+}
+
+.redirect-call__link {
+    
+
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 17px;
+    text-decoration: none;
+
+    color: #E50914;
+}
+
+.redirect-call__link:hover {
+    text-decoration: underline;;
+}
+
+@media screen and (max-width: 400px){
+    .redirect-call__message {
+        font-size: 12px;
+        line-height: 15px;
+    }
+
+    .redirect-call__link {
+        font-size: 12px;
+        line-height: 15px;
+    }
+}
