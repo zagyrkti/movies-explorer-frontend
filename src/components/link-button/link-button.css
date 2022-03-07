@@ -1,0 +1,45 @@
+.link-button {
+    display: inline-block;
+
+    padding: 8px 12px 8px 12px;
+
+    font-size: 0;
+    text-decoration: none;
+    transition: color 0.25s ease-in-out;
+}
+
+
+.link-button__text {
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 17px;
+    text-align: center;
+
+    color: var(--color-text-main);
+    opacity: var(--opacity-prominent);
+}
+
+/* TODO возможно стоит использовать отдельный менее насыщенный цвет */
+.link-button_priority_high {
+    background-color: #E50914;
+    /*background-color: #cb0812;*/
+}
+
+.link-button_priority_high {
+    background-color: #E50914;
+    /*background-color: #cb0812;*/
+}
+
+.link-button_priority_high:hover {
+    background-color: rgba(229, 9, 20, 0.9);
+}
+
+.link-button_priority_normal {
+    background-color: rgba(170, 170, 170, 0.2);
+}
+
+.link-button_priority_normal:hover {
+    background-color: rgba(170, 170, 170, 0.15);
+}
+
+

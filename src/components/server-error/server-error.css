@@ -1,0 +1,41 @@
+.server-error {
+    box-sizing: border-box;
+    position: relative;
+    width: 100%;
+}
+
+.server-error_state_hidden {
+     display: none;
+}
+
+.server-error__message {
+    margin: 0;
+    padding: 0 20px 0 20px;
+    color: rgba(207, 102, 121, 0.95);
+    font-size: 11px;
+}
+
+.server-error__close {
+    padding: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 15px;
+    height: 15px;
+
+    color: rgba(207, 102, 121, 0.95);
+    font-size: 11px;
+
+    background-image: url('../../images/close-icon.svg');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 15px 15px;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    transition: opacity 0.2s;
+}
+
+.server-error__close:hover {
+    opacity: 0.8;
+}

@@ -1,0 +1,16 @@
+.app {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: max-content 1fr max-content;
+    grid-template-areas:    'header'
+                            'content'
+                            'footer';
+
+
+    font-family: var(--font-family-main);
+    color: var(--color-text-main);
+    line-height: normal;
+
+    background-color: var(--color-bg);
+}

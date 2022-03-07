@@ -1,0 +1,121 @@
+.search {
+    position: relative;
+    box-sizing: border-box;
+    width: 100%;
+    display: flex;
+    justify-content: right;
+    align-items: center;
+}
+
+.search__indicator {
+    position: absolute;
+    box-sizing: border-box;
+    top: auto;
+    left: 0;
+    justify-self: right;
+    height: 1px;
+    width: 1px;
+
+    border-color: #009927;
+    border-radius: 8px 0 0 8px;
+    border-top-width: 2px;
+    border-top-style: solid;
+    border-left-width: 2px;
+    border-left-style: solid;
+    border-bottom-width: 2px;
+    border-bottom-style: solid;
+    z-index: 1;
+    opacity: 0;
+
+    transition: width 0.2s ease-in-out, height 0.1s ease-in-out;
+}
+
+.search__field {
+    box-sizing: border-box;
+    width: 100%;
+    padding: 16px 70px 16px 20px;
+
+    font-size: 14px;
+    line-height: 18px;
+    color: rgba(255,255,255, 0.87);
+
+    border: none;
+    outline: none;
+    border-radius: 8px;
+    background-color: #2c2c2c;
+}
+
+.search__field:focus ~ .search__indicator {
+    opacity: 1;
+    width: 20px;
+    height: 50px;
+}
+
+.search__field:focus {
+    background-color: #2c2c2c;
+}
+
+.search__field::placeholder{
+    font-size: 14px;
+    line-height: 18px;
+    color: rgba(255,255,255, 0.6);
+}
+
+
+.search__button {
+    display: none;
+    position: absolute;
+    top: auto;
+    right: auto;
+
+    width: 50px;
+    height: 50px;
+    border: none;
+
+    background-color: #E50914;
+    background-image: url('../../images/search-icon.svg');
+    background-position: center;
+    background-size: 20px 20px;
+    background-repeat: no-repeat;
+    border-radius: 8px;
+
+    cursor: pointer;
+}
+
+.search__button:hover {
+    background-size: 22px 22px;
+}
+
+@media screen and (max-width: 670px){
+    .search__field {
+        padding: 12px 52px 12px 12px;
+
+        line-height: 16px;
+    }
+
+    .search__button {
+        display: block;
+        width: 40px;
+        height: 40px;
+
+        background-size: 15px 15px;
+    }
+
+    .search__button:hover {
+        background-size: 17px 17px;
+    }
+
+    .search__field:focus ~ .search__indicator {
+        display: none;
+    }
+
+    .search__field:focus {
+        background-color: #313131;
+    }
+}
+
+@media screen and (max-width: 400px){
+    .search__indicator {
+        left: 14px
+    }
+}
