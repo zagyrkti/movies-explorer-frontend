@@ -7,7 +7,8 @@ function ToggleSwitch(props) {
     <div className={`toggle-switch ${style}`}>
       <span className='toggle-switch__line'/>
       <label className="toggle-switch__label">
-        <input className="toggle-switch__checkbox" type="checkbox" name="check" value="check" />
+        <input className="toggle-switch__checkbox" type="checkbox" name="switch" value="switch"
+               onChange={props.onChange} checked={props.values.switch}/>
         <div className="toggle-switch__toggle">
           <div className="toggle-switch__indicator" />
         </div>

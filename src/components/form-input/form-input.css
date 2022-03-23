@@ -71,3 +71,8 @@
 
     color: #CF6679;
 }
+
+input:-webkit-autofill {
+    -webkit-text-fill-color: rgba(255, 255, 255, 0.95);
+    -webkit-background-clip: text;
+}

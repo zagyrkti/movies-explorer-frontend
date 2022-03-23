@@ -3,36 +3,20 @@ import logo from '../../images/logo.svg'
 import profileIcon from '../../images/icon-profile.png'
 import NavButton from '../nav-button/nav-button';
 import { Link, useLocation } from 'react-router-dom';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import HamburgerMenu from '../hamburger-menu/hamburger-menu';
 import useWindowDimensions from '../../utils/use-window-dimensions';
+import CurrentUserContext from '../../contexts/CurrentUserContext';
 
 function Header() {
-
   const location = useLocation();
-
+  const { isLoggedIn } = useContext(CurrentUserContext)
   const { width } = useWindowDimensions();
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const handleHamburgerClick = () => {
     setIsMenuOpen(!isMenuOpen);
-  }
-
-  let isLoggedIn;
-
-  switch (location.pathname) {
-    case '/':
-      isLoggedIn = false;
-      break;
-    case '/signup':
-      isLoggedIn = false;
-      break;
-    case '/signin':
-      isLoggedIn = false;
-      break;
-    default:
-      isLoggedIn = true;
   }
 
   return (
@@ -42,7 +26,7 @@ function Header() {
           <img className='header__logo' src={logo} alt="логотип сайта" />
         </Link>
 
-        {location.pathname !== '/' &&
+        {(location.pathname !== '/' || isLoggedIn) &&
           <button className='header__hamburger' onClick={handleHamburgerClick} />
         }
         {isMenuOpen &&

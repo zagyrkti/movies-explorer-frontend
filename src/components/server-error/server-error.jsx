@@ -10,12 +10,12 @@ function ServerError(props) {
 
   function handleCloseClick() {
     setIsErrorVisible(false);
+    props.onErrorClear();
   }
 
   useEffect(() => {
     props.error ? setIsErrorVisible(true) : setIsErrorVisible(false)
   },[props.error])
-
 
   return (
     <div className={`server-error ${style}`}>

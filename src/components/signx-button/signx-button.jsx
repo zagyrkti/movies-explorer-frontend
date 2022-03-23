@@ -5,7 +5,7 @@ function SignxButton(props) {
   const statusClass = props.isFormValid ? '' : 'signx-button_state_disabled'
 
   return (
-    <button className={`signx-button ${style} ${statusClass}`} onClick={props.onClick}>
+    <button type='submit' className={`signx-button ${style} ${statusClass}`} onClick={props.onClick} disabled={props.disabled}>
       <span className='signx-button__text'>{props.children}</span>
     </button>
   )

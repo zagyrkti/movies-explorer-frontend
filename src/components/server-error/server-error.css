@@ -2,6 +2,7 @@
     box-sizing: border-box;
     position: relative;
     width: 100%;
+    text-align: center;
 }
 
 .server-error_state_hidden {

@@ -1,5 +1,6 @@
 .movie-card {
     font-size: 0;
+    position: relative;
 }
 
 .movie-card__title {
@@ -175,11 +176,17 @@
     background-image: url('../../images/delete-icon.svg');
 }
 
-@media screen and (max-width: 670px) {
-    .movie-card:nth-child(n+6) {
-        display: none;
-    }
+.movie-card__error {
+    font-weight: normal;
+    font-size: 12px;
+    line-height: 15px;
+    text-align: center;
 
+    color: #CF6679;
+    opacity: var(--opacity-prominent);
+}
+
+@media screen and (max-width: 670px) {
     .movie-card__body {
         flex-direction: column;
     }

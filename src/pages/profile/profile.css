@@ -49,10 +49,18 @@
     margin: 20px 0 0 0;
 }
 
+.profile__signx-button_state_hidden {
+    display: none;
+}
+
 .profile__server-error {
     padding: 15px 0 0 0;
     margin: 15px 0 0 0;
     max-width: 396px;
+}
+
+.profile__server-error_state_hidden {
+    display: none;
 }
 
 @media screen and (max-width: 436px){
