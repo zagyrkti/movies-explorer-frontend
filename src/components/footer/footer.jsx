@@ -22,11 +22,11 @@ function Footer() {
   }
 
   return (
-    <footer className={`footer ${isFooterShown}`}>
-      <p className='footer__org'>Учебный проект Яндекс.Практикум х BeatFilm.</p>
-      <span className='footer__year'>© 2022</span>
-      <Links className='footer__links'/>
-    </footer>
+      <footer className={`footer ${isFooterShown}`}>
+        <p className='footer__org'>Учебный проект Яндекс.Практикум х BeatFilm.</p>
+        <span className='footer__year'>© 2022</span>
+        <Links className='footer__links' />
+      </footer>
   )
 }
 

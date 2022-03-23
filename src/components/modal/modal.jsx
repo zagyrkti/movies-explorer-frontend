@@ -6,10 +6,10 @@ const modalRoot = document.getElementById("modal");
 function Modal(props) {
 
   return ReactDOM.createPortal(
-    <div className='modal'>
-      {props.children}
-    </div>,
-    modalRoot
+      <div className='modal'>
+        {props.children}
+      </div>,
+      modalRoot
   );
 }
 

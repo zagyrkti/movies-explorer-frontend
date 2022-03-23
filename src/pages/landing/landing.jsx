@@ -6,12 +6,12 @@ import AboutMe from '../../components/about-me/about-me';
 
 function Landing() {
   return (
-    <main className='landing'>
-      <Promo />
-      <AboutProject />
-      <Techs />
-      <AboutMe />
-    </main>
+      <main className='landing'>
+        <Promo />
+        <AboutProject />
+        <Techs />
+        <AboutMe />
+      </main>
   )
 }
 

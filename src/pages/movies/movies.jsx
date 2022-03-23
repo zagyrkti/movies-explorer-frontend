@@ -40,40 +40,40 @@ function Movies() {
     setIsBeatfilmMoviesRequestFailed(false)
   }
 
-/*    const movieDataSource = () => {
-      return (movies.length ? Promise.resolve(movies) : getBeatfilmMoviesRequest())
-          .then((moviData) => {
-            if (!movies.length) {
-              setMovies(moviData);
+  /*    const movieDataSource = () => {
+        return (movies.length ? Promise.resolve(movies) : getBeatfilmMoviesRequest())
+            .then((moviData) => {
+              if (!movies.length) {
+                setMovies(moviData);
+                return moviData;
+              }
               return moviData;
-            }
-            return moviData;
-          })
-    }
+            })
+      }
 
-    const handleSearch = (event) =>  {
-      event.preventDefault();
-      resetStateBeforeSearch();
-      setIsBeatfilmMoviesRequestSent(true);
-      movieDataSource()
-          .then((moviesData) => {
-            let results = [];
-            if (values.query === 'rnd7' && moviesData.length >= 7) {
-              results = randomSeven(moviesData);
-            } else {
-              results = searchMovies(moviesData, values.query);
-            }
-            results.length ? setSearchResult(results) : setIsNothingFound(true);
-            savePageState(values, results);
+      const handleSearch = (event) =>  {
+        event.preventDefault();
+        resetStateBeforeSearch();
+        setIsBeatfilmMoviesRequestSent(true);
+        movieDataSource()
+            .then((moviesData) => {
+              let results = [];
+              if (values.query === 'rnd7' && moviesData.length >= 7) {
+                results = randomSeven(moviesData);
+              } else {
+                results = searchMovies(moviesData, values.query);
+              }
+              results.length ? setSearchResult(results) : setIsNothingFound(true);
+              savePageState(values, results);
+            })
+            .catch((error) => {
+              console.log(`%cCatch ${error}`, 'color: red');
+              setIsBeatfilmMoviesRequestFailed(true);
+            })
+            .finally(() => {
+            setIsBeatfilmMoviesRequestSent(false)
           })
-          .catch((error) => {
-            console.log(`%cCatch ${error}`, 'color: red');
-            setIsBeatfilmMoviesRequestFailed(true);
-          })
-          .finally(() => {
-          setIsBeatfilmMoviesRequestSent(false)
-        })
-    }*/
+      }*/
 
   /* Запросы при каждом поиске */
   /* А то так совсем не интересно + нельзя гарантировать что список фильмов не сервере не поменялся */
@@ -153,13 +153,13 @@ function Movies() {
             </>
         }
         {isBeatfilmMoviesRequestFailed &&
-          <p className='movies__error'>Ошибка при выполнении запроса</p>
+            <p className='movies__error'>Ошибка при выполнении запроса</p>
         }
         {isNothingFound &&
             <NothingFound />
         }
         {!isNothingFound && !isBeatfilmMoviesRequestSent && !moviesToRender.length && !isBeatfilmMoviesRequestFailed &&
-          <p className='movies__intro'>Поисковик по каталогу Beat Film Festival</p>
+            <p className='movies__intro'>Поисковик по каталогу Beat Film Festival</p>
         }
       </main>
   )

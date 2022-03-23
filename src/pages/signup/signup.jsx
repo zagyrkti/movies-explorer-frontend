@@ -8,7 +8,6 @@ import ServerError from '../../components/server-error/server-error';
 import { SIGNIN_ERROR_MESSAGES, SIGNUP_ERROR_MESSAGES, SIGNUP_INITIAL_FORM_STATE } from '../../utils/constants';
 import { useState } from 'react';
 import { signUpRequest } from '../../utils/main-api';
-import { useNavigate } from 'react-router-dom';
 
 function Signup({ onSignIn }) {
   const [signUpError, setSignUpError] = useState('');
@@ -18,7 +17,7 @@ function Signup({ onSignIn }) {
 
   const nameConstrains = { minLength: '2', maxLength: '30', required: true }
   const emailConstrains = { required: true }
-  const passwordConstrains = { minLength: '6', maxLength: '20', required: true}
+  const passwordConstrains = { minLength: '6', maxLength: '20', required: true }
 
   const handleErrorClear = () => {
     setSignUpError('');

@@ -20,37 +20,37 @@ function Header() {
   }
 
   return (
-    <header className='header'>
-      <div className='header__content'>
-        <Link className='header__logo-link' to='/'>
-          <img className='header__logo' src={logo} alt="логотип сайта" />
-        </Link>
+      <header className='header'>
+        <div className='header__content'>
+          <Link className='header__logo-link' to='/'>
+            <img className='header__logo' src={logo} alt="логотип сайта" />
+          </Link>
 
-        {(location.pathname !== '/' || isLoggedIn) &&
-          <button className='header__hamburger' onClick={handleHamburgerClick} />
-        }
-        {isMenuOpen &&
-          <HamburgerMenu onCloseClick={handleHamburgerClick} isLoggedIn={isLoggedIn}/>
-        }
+          {(location.pathname !== '/' || isLoggedIn) &&
+              <button className='header__hamburger' onClick={handleHamburgerClick} />
+          }
+          {isMenuOpen &&
+              <HamburgerMenu onCloseClick={handleHamburgerClick} isLoggedIn={isLoggedIn} />
+          }
 
-        {isLoggedIn &&
-          <div className='header__main-nav'>
-            <div className='header__film-block'>
-              <NavButton to={'/movies'}>Фильмы</NavButton>
-              <NavButton to={'/saved-movies'} className='header__nav-button'>Сохраненные фильмы</NavButton>
-            </div>
-            <NavButton to={'/profile'} icon={profileIcon}>Аккаунт</NavButton>
-          </div>
-        }
+          {isLoggedIn &&
+              <div className='header__main-nav'>
+                <div className='header__film-block'>
+                  <NavButton to={'/movies'}>Фильмы</NavButton>
+                  <NavButton to={'/saved-movies'} className='header__nav-button'>Сохраненные фильмы</NavButton>
+                </div>
+                <NavButton to={'/profile'} icon={profileIcon}>Аккаунт</NavButton>
+              </div>
+          }
 
-        {!isLoggedIn && (width > 670 || location.pathname === '/') &&
-          <div className='header__signx'>
-            <NavButton to={'/signup'}>Регистрация</NavButton>
-            <NavButton className='header__nav-button' to={'/signin'} type={'priority'}>Войти</NavButton>
-          </div>
-        }
-      </div>
-    </header>
+          {!isLoggedIn && (width > 670 || location.pathname === '/') &&
+              <div className='header__signx'>
+                <NavButton to={'/signup'}>Регистрация</NavButton>
+                <NavButton className='header__nav-button' to={'/signin'} type={'priority'}>Войти</NavButton>
+              </div>
+          }
+        </div>
+      </header>
   )
 }
 

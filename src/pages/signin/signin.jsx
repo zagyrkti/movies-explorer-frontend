@@ -7,7 +7,6 @@ import RedirectCall from '../../components/redirect-call/redirect-call';
 import ServerError from '../../components/server-error/server-error';
 import { SIGNIN_ERROR_MESSAGES, SIGNIN_INITIAL_FORM_STATE } from '../../utils/constants';
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 
 function Signin({ onSignIn }) {
   const { values, handleChange, resetForm, errors, isValid } = useForm(SIGNIN_INITIAL_FORM_STATE);
