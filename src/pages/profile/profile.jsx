@@ -32,6 +32,7 @@ function Profile({ onSignOut, onUpdateUserData }) {
   }
 
   const handleChancelBtnClick = () => {
+    resetForm({email, name}, {}, true);
     setIsEditingInProgress(false);
   }
 
@@ -77,6 +78,7 @@ function Profile({ onSignOut, onUpdateUserData }) {
     if (isEditingInProgress) {
       if (ref.current) {
         ref.current.focus();
+        ref.current.setSelectionRange(ref.current.value.length, ref.current.value.length)
       }
     }
   }, [isEditingInProgress])
