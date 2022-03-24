@@ -12,7 +12,7 @@ import { signUpRequest } from '../../utils/main-api';
 function Signup({ onSignIn }) {
   const [signUpError, setSignUpError] = useState('');
 
-  const { values, handleChange, resetForm, errors, isValid } = useForm(SIGNUP_INITIAL_FORM_STATE);
+  const { values, handleChange, resetForm, errors, isValid } = useForm(SIGNUP_INITIAL_FORM_STATE, false);
   const [isSignXRequestSent, setIsSignXRequestSent] = useState(false)
 
   const nameConstrains = { minLength: '2', maxLength: '30', required: true }

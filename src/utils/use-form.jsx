@@ -1,11 +1,11 @@
 import { useCallback, useState } from 'react';
 
-const useForm = (initialValuesState) => {
+const useForm = (initialValuesState, validityInitialState = true) => {
 
   const [values, setValues] = useState(initialValuesState || {});
 
   const [errors, setErrors] = useState({});
-  const [isValid, setIsValid] = useState(true);
+  const [isValid, setIsValid] = useState(validityInitialState);
 
   const handleChange = (evt) => {
     const input = evt.target;
