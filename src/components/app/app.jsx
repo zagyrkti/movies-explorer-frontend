@@ -129,6 +129,7 @@ function App() {
     if (token) {
       processLoginByToken()
     }
+    localStorage.setItem('beatFilmMovies', null);
   }, [])
 
   useEffect(() => {

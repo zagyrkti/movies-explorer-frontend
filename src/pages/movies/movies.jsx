@@ -28,7 +28,6 @@ function Movies() {
   const [isMoreButtonShown, setIsMoreButtonShown] = useState(false)
   const [isNothingFound, setIsNothingFound] = useState(false);
   const [isBeatfilmMoviesRequestFailed, setIsBeatfilmMoviesRequestFailed] = useState(false);
-  const [movies, setMovies] = useState([]);
 
   const [isBeatfilmMoviesRequestSent, setIsBeatfilmMoviesRequestSent] = useState(false);
 
@@ -45,10 +44,11 @@ function Movies() {
   }
 
   const movieDataSource = () => {
-    return (movies.length ? Promise.resolve(movies) : getBeatfilmMoviesRequest())
+    const beatFilmMoviesInStore = JSON.parse(localStorage.getItem('beatFilmMovies'));
+    return (beatFilmMoviesInStore ? Promise.resolve(beatFilmMoviesInStore) : getBeatfilmMoviesRequest())
         .then((moviData) => {
-          if (!movies.length) {
-            setMovies(moviData);
+          if (!beatFilmMoviesInStore) {
+            localStorage.setItem('beatFilmMovies', JSON.stringify(moviData));
             return moviData;
           }
           return moviData;
