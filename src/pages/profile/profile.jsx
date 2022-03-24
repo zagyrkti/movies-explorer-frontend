@@ -105,7 +105,7 @@ function Profile({ onSignOut, onUpdateUserData }) {
           />
           <ServerError error={profileError} className={`profile__server-error ${serverErrorClassName}`}
                        onErrorClear={handleErrorClear} />
-          <SignxButton className={`profile__signx-button ${signxButtonClassName}`}
+          <SignxButton className={`profile__signx-button ${signxButtonClassName}`} disabled={isProfileUpdateRequestSent}
                        isFormValid={isValid}>{SignXBtnText}</SignxButton>
         </form>
 
