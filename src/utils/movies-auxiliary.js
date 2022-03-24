@@ -26,11 +26,33 @@ const searchMovies = (moviesList, searchQuery) => {
   );
 };
 
+/*const savePageState = (searchFormState, searchResult) => {
+  if (searchFormState) {
+    localStorage.setItem('searchFormState', JSON.stringify(searchFormState));
+  }
+  if (searchResult) {
+    localStorage.setItem('searchResult', JSON.stringify(searchResult));
+  }
+};*/
 
+const savePageState = () => {
+  const getFormState = () => {
+    return localStorage.getItem('searchFormState') ? JSON.parse(localStorage.getItem('searchFormState')) : {};
+  }
+  const saveFormState = (stateToSave) => {
+    if (typeof stateToSave === 'function') {
+      const result = stateToSave(getFormState());
+      localStorage.setItem('searchFormState', JSON.stringify(result))
+      return;
+    }
+    localStorage.setItem('searchFormState', JSON.stringify(stateToSave))
+  }
 
-const savePageState = (searchFormState, searchResult) => {
-  localStorage.setItem('searchFormState', JSON.stringify(searchFormState));
-  localStorage.setItem('searchResult', JSON.stringify(searchResult));
+  const saveSearchResult = (searchResult) => {
+    localStorage.setItem('searchResult', JSON.stringify(searchResult));
+  }
+
+  return [saveFormState, saveSearchResult];
 };
 
 const restorePageState = (searchFormStateSetter, searchResultSetter) => {

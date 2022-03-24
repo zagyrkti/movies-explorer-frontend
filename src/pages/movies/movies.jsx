@@ -75,7 +75,9 @@ function Movies() {
             results = searchMovies(moviesData, values.query);
           }
           results.length ? setSearchResult(results) : setIsNothingFound(true);
-          savePageState(values, results);
+          const [saveFormState, saveSearchResult] = savePageState();
+          saveFormState(values);
+          saveSearchResult(results);
         })
         .catch((error) => {
           console.log(`%cCatch ${error}`, 'color: red');
@@ -144,6 +146,13 @@ function Movies() {
   useEffect(() => {
     restorePageState(setValues, setSearchResult);
   }, [])
+
+  useEffect(() => {
+    const [saveFormState] = savePageState();
+    saveFormState((state) => {
+      return {...state, switch: values.switch};
+    })
+  }, [values.switch])
 
   const moviesList = useMemo(() => <MoviesList className={'movies__movies-list'}
                                                movies={moviesToRender} />, [moviesToRender])
