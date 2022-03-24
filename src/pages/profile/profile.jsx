@@ -27,6 +27,7 @@ function Profile({ onSignOut, onUpdateUserData }) {
   const [isEditingInProgress, setIsEditingInProgress] = useState(false);
 
   const handleEditBtnClick = () => {
+    setProfileError('');
     setIsEditingInProgress(true)
   }
 
@@ -45,6 +46,7 @@ function Profile({ onSignOut, onUpdateUserData }) {
     }
     if (values.email === email && values.name === name) {
       setIsEditingInProgress(false)
+      setProfileError('Данные идентичны начальным, обновление не выполнено')
       return;
     }
     setIsProfileUpdateRequestSent(true);
