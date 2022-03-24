@@ -15,7 +15,11 @@ import {
   searchMovies
 } from '../../utils/movies-auxiliary';
 import NothingFound from '../../components/nothing-found/nothing-found';
-import { MOVIES_INITIAL_FORM_STATE, MOVIES_TO_RENDER_LIMITS, RANDOM_MOVIES_SAFETY_LIMIT } from '../../constants/constants';
+import {
+  MOVIES_INITIAL_FORM_STATE,
+  MOVIES_TO_RENDER_LIMITS,
+  RANDOM_MOVIES_SAFETY_LIMIT
+} from '../../constants/constants';
 
 function Movies() {
   const { values, handleChange, resetForm, errors, isValid, setValues } = useForm(MOVIES_INITIAL_FORM_STATE);
@@ -40,45 +44,16 @@ function Movies() {
     setIsBeatfilmMoviesRequestFailed(false)
   }
 
-  /*    const movieDataSource = () => {
-        return (movies.length ? Promise.resolve(movies) : getBeatfilmMoviesRequest())
-            .then((moviData) => {
-              if (!movies.length) {
-                setMovies(moviData);
-                return moviData;
-              }
-              return moviData;
-            })
-      }
-
-      const handleSearch = (event) =>  {
-        event.preventDefault();
-        resetStateBeforeSearch();
-        setIsBeatfilmMoviesRequestSent(true);
-        movieDataSource()
-            .then((moviesData) => {
-              let results = [];
-              if (values.query === 'rnd7' && moviesData.length >= 7) {
-                results = randomSeven(moviesData);
-              } else {
-                results = searchMovies(moviesData, values.query);
-              }
-              results.length ? setSearchResult(results) : setIsNothingFound(true);
-              savePageState(values, results);
-            })
-            .catch((error) => {
-              console.log(`%cCatch ${error}`, 'color: red');
-              setIsBeatfilmMoviesRequestFailed(true);
-            })
-            .finally(() => {
-            setIsBeatfilmMoviesRequestSent(false)
-          })
-      }*/
-
-  /* Запросы при каждом поиске */
-  /* А то так совсем не интересно + нельзя гарантировать что список фильмов не сервере не поменялся */
-  /* Прелоадер опять же делал старался, а он сам себя не покажет ) */
-  /* Примерная реализация без дозапросов выше, вроде работает(кнопка сохранить сама о себе заботится) */
+  const movieDataSource = () => {
+    return (movies.length ? Promise.resolve(movies) : getBeatfilmMoviesRequest())
+        .then((moviData) => {
+          if (!movies.length) {
+            setMovies(moviData);
+            return moviData;
+          }
+          return moviData;
+        })
+  }
 
   const handleSearch = (event) => {
     event.preventDefault();
@@ -91,7 +66,7 @@ function Movies() {
     }
     resetStateBeforeSearch();
     setIsBeatfilmMoviesRequestSent(true);
-    getBeatfilmMoviesRequest()
+    movieDataSource()
         .then((moviesData) => {
           let results = [];
           if (values.query === 'rnd7' && moviesData.length >= RANDOM_MOVIES_SAFETY_LIMIT) {
@@ -103,13 +78,49 @@ function Movies() {
           savePageState(values, results);
         })
         .catch((error) => {
-          console.log(`%cCatch getBeatfilmMovies ${error}`, 'color: red');
+          console.log(`%cCatch ${error}`, 'color: red');
           setIsBeatfilmMoviesRequestFailed(true);
         })
         .finally(() => {
           setIsBeatfilmMoviesRequestSent(false)
         })
   }
+
+  /* Запросы при каждом поиске */
+  /* А то так совсем не интересно + нельзя гарантировать что список фильмов не сервере не поменялся */
+  /* Прелоадер опять же делал старался, а он сам себя не покажет ) */
+  /* Примерная реализация без дозапросов выше, вроде работает(кнопка сохранить сама о себе заботится) */
+
+/*    const handleSearch = (event) => {
+      event.preventDefault();
+      if (isBeatfilmMoviesRequestSent) {
+        return;
+      }
+      if (!values.query) {
+        setValues((prevState) => ({ ...prevState, query: 'Введите запрос' }))
+        return;
+      }
+      resetStateBeforeSearch();
+      setIsBeatfilmMoviesRequestSent(true);
+      getBeatfilmMoviesRequest()
+          .then((moviesData) => {
+            let results = [];
+            if (values.query === 'rnd7' && moviesData.length >= RANDOM_MOVIES_SAFETY_LIMIT) {
+              results = randomSeven(moviesData);
+            } else {
+              results = searchMovies(moviesData, values.query);
+            }
+            results.length ? setSearchResult(results) : setIsNothingFound(true);
+            savePageState(values, results);
+          })
+          .catch((error) => {
+            console.log(`%cCatch getBeatfilmMovies ${error}`, 'color: red');
+            setIsBeatfilmMoviesRequestFailed(true);
+          })
+          .finally(() => {
+            setIsBeatfilmMoviesRequestSent(false)
+          })
+    }*/
 
   const handleShowMore = () => {
     setMaxMoviesToRender((prevState) => prevState + MOVIES_TO_RENDER_LIMITS.step);
