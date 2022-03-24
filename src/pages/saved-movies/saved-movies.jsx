@@ -3,7 +3,7 @@ import saveBtn from '../../images/save7.svg';
 import Search from '../../components/search/search';
 import ToggleSwitch from '../../components/toggle-switch/toggle-switch';
 import MoviesList from '../../components/movies-list/movies-list';
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useEffect, useMemo, useState } from 'react';
 import Preloader from '../../components/preloader/preloader';
 import useForm from '../../utils/use-form';
 import savedMoviesContext from '../../contexts/SavedMoviesContext';
@@ -16,6 +16,7 @@ function SavedMovies() {
   const { savedMoviesList, savedMoviesRequestState } = useContext(savedMoviesContext)
 
   const { values, handleChange, resetForm, errors, isValid, setValues } = useForm(MOVIES_INITIAL_FORM_STATE);
+  const [isNoShortsInRender, setIsNoShortsInRender] = useState(false);
 
   const [moviesToRender, setMoviesToRender] = useState([]);
 
@@ -24,22 +25,58 @@ function SavedMovies() {
   }
   /* Прямых требований как должен быть реализован поиск на этой странице вроде нет */
   /* сделана мгновенная фильтрация */
+
   useEffect(() => {
-    if (values.query && savedMoviesList.length) {
+    if (!savedMoviesList.length) {
+      setIsNoShortsInRender(false);
+      setMoviesToRender([]);
+      return;
+    }
+
+    if (values.query) {
+      setIsNoShortsInRender(false);
       const results = searchMovies(savedMoviesList, values.query)
+
+      if (!results.length) {
+        setMoviesToRender([]);
+        return;
+      }
+
       if (!values.switch) {
         setMoviesToRender(results);
         return;
       }
-      setMoviesToRender(filterShortMovies(results));
+
+      const shortsToRender = filterShortMovies(results);
+      if (shortsToRender.length) {
+        setMoviesToRender(shortsToRender);
+        return;
+      }
+
+      setMoviesToRender([]);
+      setIsNoShortsInRender(true);
+
     } else {
-      if (!values.switch && savedMoviesList.length) {
+
+      if (!values.switch) {
         setMoviesToRender(savedMoviesList);
         return;
       }
-      setMoviesToRender(filterShortMovies(savedMoviesList));
+
+      const shortsToRender = filterShortMovies(savedMoviesList);
+      if (shortsToRender.length) {
+        setMoviesToRender(shortsToRender);
+        return;
+      }
+
+      setMoviesToRender([]);
+      setIsNoShortsInRender(true);
     }
   }, [values.switch, values.query, savedMoviesList])
+
+
+  const moviesList = useMemo(() => <MoviesList className={'saved-movies__movies-list'}
+                                               movies={moviesToRender} />, [moviesToRender])
 
   return (
       <main className='saved-movies'>
@@ -54,10 +91,13 @@ function SavedMovies() {
             <Preloader />
         }
         {!savedMoviesRequestState.sent && !!moviesToRender.length &&
-            <MoviesList className={'saved-movies__movies-list'} movies={moviesToRender} />
+            moviesList
         }
-        {!!savedMoviesList.length && values.query && !moviesToRender.length &&
+        {!!savedMoviesList.length && values.query && !moviesToRender.length && !isNoShortsInRender &&
             <NothingFound />
+        }
+        {values.switch && isNoShortsInRender && !!savedMoviesList.length &&
+            <NothingFound>Только полный метр</NothingFound>
         }
         {!savedMoviesList.length &&
             <div className='saved-movies__call'>

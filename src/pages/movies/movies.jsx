@@ -157,6 +157,9 @@ function Movies() {
   const moviesList = useMemo(() => <MoviesList className={'movies__movies-list'}
                                                movies={moviesToRender} />, [moviesToRender])
 
+  const lastResortGuard = !isNothingFound && !isBeatfilmMoviesRequestSent && !searchResult.length
+      && !isBeatfilmMoviesRequestFailed && !!searchResult.length && !moviesToRender.length;
+
   return (
       <main className='movies'>
         <Search className={'movies__search'} onSearch={handleSearch} onChange={handleChange} values={values} />
@@ -178,7 +181,11 @@ function Movies() {
         {isNothingFound &&
             <NothingFound />
         }
-        {!isNothingFound && !isBeatfilmMoviesRequestSent && !moviesToRender.length && !isBeatfilmMoviesRequestFailed &&
+        {!!searchResult.length && !moviesToRender.length &&
+            <NothingFound>Только полный метр</NothingFound>
+        }
+
+        {lastResortGuard &&
             <p className='movies__intro'>Поисковик по каталогу Beat Film Festival</p>
         }
       </main>
