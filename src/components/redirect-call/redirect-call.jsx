@@ -1,7 +1,9 @@
 import './redirect-call.css';
 import { Link } from 'react-router-dom';
 
+
 function RedirectCall(props) {
+  /*TODO порешать с нулем*/
   const style = props.className ? props.className : 0;
 
   return (

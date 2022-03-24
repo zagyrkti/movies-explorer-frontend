@@ -8,7 +8,7 @@ import Preloader from '../../components/preloader/preloader';
 import useForm from '../../utils/use-form';
 import savedMoviesContext from '../../contexts/SavedMoviesContext';
 import { filterShortMovies, searchMovies } from '../../utils/movies-auxiliary';
-import { MOVIES_INITIAL_FORM_STATE } from '../../utils/constants';
+import { MOVIES_INITIAL_FORM_STATE } from '../../constants/constants';
 import NothingFound from '../../components/nothing-found/nothing-found';
 
 function SavedMovies() {

@@ -1,5 +1,4 @@
-const BEATFILM_API_URL = 'https://api.nomoreparties.co'
-
+import { BEATFILM_API_URL } from '../constants/constants';
 
 function limitedRandomNumbers(max) { // min and max included
   const randomNumbers = [];

@@ -8,7 +8,7 @@ import {
   getUnifiedProperties
 } from '../../utils/movies-auxiliary';
 import savedMoviesContext from '../../contexts/SavedMoviesContext';
-import { MOVIE_CARD_ERROR_MESSAGES } from '../../utils/constants';
+import { MOVIE_CARD_ERROR_MESSAGES } from '../../constants/constants';
 
 function MovieCard({ movieData }) {
   const location = useLocation();

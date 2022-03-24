@@ -1,4 +1,4 @@
-const BEATFILM_API_URL = 'https://api.nomoreparties.co'
+import { BEATFILM_API_URL } from '../constants/constants';
 
 const getBeatfilmMoviesRequest = () => {
   return fetch(`${BEATFILM_API_URL}/beatfilm-movies`)

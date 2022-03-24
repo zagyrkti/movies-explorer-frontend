@@ -1,7 +1,5 @@
 import { convertBeatfilmMovieToServerFormat } from './movies-auxiliary';
-
-const MAIN_API_URL = 'https://api.mexp.zagyrkti.nomoredomains.rocks'
-
+import { MAIN_API_URL } from '../constants/constants';
 
 function processResponse(res) {
   if (res.ok) {

@@ -20,7 +20,7 @@ import {
 import { signInRequest } from '../../utils/main-api';
 import CurrentUserContext from '../../contexts/CurrentUserContext';
 import SavedMoviesContext from '../../contexts/SavedMoviesContext';
-import { USER_DATA_INITIAL } from '../../utils/constants';
+import { SAVED_MOVIES_REQUEST_INITIAL_STATE, USER_DATA_INITIAL } from '../../constants/constants';
 import ProtectedRoute from '../protected-route/protected-route';
 
 function App() {
@@ -33,11 +33,7 @@ function App() {
   const [userData, setUserData] = useState(USER_DATA_INITIAL);
 
   const [savedMoviesList, setSavedMoviesList] = useState([])
-  const [savedMoviesRequestState, setSavedMoviesRequestState] = useState({
-    sent: false,
-    failed: false,
-    savedListEmpty: false,
-  })
+  const [savedMoviesRequestState, setSavedMoviesRequestState] = useState(SAVED_MOVIES_REQUEST_INITIAL_STATE)
 
   const handleSaveMovie = (movieToAdd) => {
     return saveMovieRequest(movieToAdd)

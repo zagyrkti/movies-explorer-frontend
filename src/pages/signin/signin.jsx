@@ -5,7 +5,7 @@ import useForm from '../../utils/use-form';
 import SignxButton from '../../components/signx-button/signx-button';
 import RedirectCall from '../../components/redirect-call/redirect-call';
 import ServerError from '../../components/server-error/server-error';
-import { SIGNIN_ERROR_MESSAGES, SIGNIN_INITIAL_FORM_STATE } from '../../utils/constants';
+import { SIGNIN_ERROR_MESSAGES, SIGNIN_INITIAL_FORM_STATE } from '../../constants/constants';
 import { useState } from 'react';
 
 function Signin({ onSignIn }) {

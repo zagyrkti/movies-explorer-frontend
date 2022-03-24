@@ -15,12 +15,12 @@ import {
   searchMovies
 } from '../../utils/movies-auxiliary';
 import NothingFound from '../../components/nothing-found/nothing-found';
-import { MOVIES_INITIAL_FORM_STATE } from '../../utils/constants';
+import { MOVIES_INITIAL_FORM_STATE, MOVIES_TO_RENDER_LIMITS, RANDOM_MOVIES_SAFETY_LIMIT } from '../../constants/constants';
 
 function Movies() {
   const { values, handleChange, resetForm, errors, isValid, setValues } = useForm(MOVIES_INITIAL_FORM_STATE);
 
-  const [maxMoviesToRender, setMaxMoviesToRender] = useState(7)
+  const [maxMoviesToRender, setMaxMoviesToRender] = useState(MOVIES_TO_RENDER_LIMITS.initial)
   const [isMoreButtonShown, setIsMoreButtonShown] = useState(false)
   const [isNothingFound, setIsNothingFound] = useState(false);
   const [isBeatfilmMoviesRequestFailed, setIsBeatfilmMoviesRequestFailed] = useState(false);
@@ -34,7 +34,7 @@ function Movies() {
   const resetStateBeforeSearch = () => {
     setMoviesToRender([]);
     setSearchResult([]);
-    setMaxMoviesToRender(7);
+    setMaxMoviesToRender(MOVIES_TO_RENDER_LIMITS.initial);
     setIsMoreButtonShown(false)
     setIsNothingFound(false)
     setIsBeatfilmMoviesRequestFailed(false)
@@ -94,7 +94,7 @@ function Movies() {
     getBeatfilmMoviesRequest()
         .then((moviesData) => {
           let results = [];
-          if (values.query === 'rnd7' && moviesData.length >= 7) {
+          if (values.query === 'rnd7' && moviesData.length >= RANDOM_MOVIES_SAFETY_LIMIT) {
             results = randomSeven(moviesData);
           } else {
             results = searchMovies(moviesData, values.query);
@@ -112,7 +112,7 @@ function Movies() {
   }
 
   const handleShowMore = () => {
-    setMaxMoviesToRender((prevState) => prevState + 7);
+    setMaxMoviesToRender((prevState) => prevState + MOVIES_TO_RENDER_LIMITS.step);
   }
 
   useEffect(() => {

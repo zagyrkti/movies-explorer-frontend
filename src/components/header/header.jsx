@@ -7,6 +7,7 @@ import { useContext, useState } from 'react';
 import HamburgerMenu from '../hamburger-menu/hamburger-menu';
 import useWindowDimensions from '../../utils/use-window-dimensions';
 import CurrentUserContext from '../../contexts/CurrentUserContext';
+import { HAMBURGER_BREAKPOINT } from '../../constants/constants';
 
 function Header() {
   const location = useLocation();
@@ -43,7 +44,7 @@ function Header() {
               </div>
           }
 
-          {!isLoggedIn && (width > 670 || location.pathname === '/') &&
+          {!isLoggedIn && (width > HAMBURGER_BREAKPOINT || location.pathname === '/') &&
               <div className='header__signx'>
                 <NavButton to={'/signup'}>Регистрация</NavButton>
                 <NavButton className='header__nav-button' to={'/signin'} type={'priority'}>Войти</NavButton>
