@@ -31,6 +31,10 @@ function Profile({ onSignOut, onUpdateUserData }) {
     setIsEditingInProgress(true)
   }
 
+  const handleChancelBtnClick = () => {
+    setIsEditingInProgress(false);
+  }
+
   const handleErrorClear = () => {
     setProfileError('');
   }
@@ -109,6 +113,10 @@ function Profile({ onSignOut, onUpdateUserData }) {
                        onErrorClear={handleErrorClear} />
           <SignxButton className={`profile__signx-button ${signxButtonClassName}`} disabled={isProfileUpdateRequestSent}
                        isFormValid={isValid}>{SignXBtnText}</SignxButton>
+          {isEditingInProgress && !isProfileUpdateRequestSent &&
+              <button type='button' className='profile__button profile__button_type_sub'
+                      onClick={handleChancelBtnClick}>Отмена</button>
+          }
         </form>
 
         {!isEditingInProgress &&

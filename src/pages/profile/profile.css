@@ -29,6 +29,8 @@
     background-color: transparent;
     border: none;
     cursor: pointer;
+
+    transition: opacity 0.25s;
 }
 
 .profile__button:hover {
@@ -38,6 +40,14 @@
 .profile__button_type_danger {
     color: #E50914;
     opacity: 1;
+}
+
+.profile__button_type_sub {
+    margin: 20px 0 0 0;
+    opacity: var(--opacity-secondary);
+}
+.profile__button_type_sub:hover {
+    opacity: var(--opacity-normal);
 }
 
 .profile__button:first-of-type {
@@ -70,5 +80,15 @@
 
     .profile__button {
         margin: 7px 0 0 0;
+    }
+
+    .profile__button_type_sub {
+        margin: 20px 0 0 0;
+    }
+}
+
+@media screen and (max-width: 320px){
+    .profile__button_type_sub {
+        font-size: 12px;
     }
 }
