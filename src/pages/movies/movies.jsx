@@ -158,7 +158,7 @@ function Movies() {
                                                movies={moviesToRender} />, [moviesToRender])
 
   const lastResortGuard = !isNothingFound && !isBeatfilmMoviesRequestSent && !searchResult.length
-      && !isBeatfilmMoviesRequestFailed && !!searchResult.length && !moviesToRender.length;
+      && !isBeatfilmMoviesRequestFailed && !searchResult.length && !moviesToRender.length;
 
   return (
       <main className='movies'>
