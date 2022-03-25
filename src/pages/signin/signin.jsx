@@ -5,48 +5,71 @@ import useForm from '../../utils/use-form';
 import SignxButton from '../../components/signx-button/signx-button';
 import RedirectCall from '../../components/redirect-call/redirect-call';
 import ServerError from '../../components/server-error/server-error';
+import { SIGNIN_ERROR_MESSAGES, SIGNIN_INITIAL_FORM_STATE } from '../../constants/constants';
+import { useState } from 'react';
 
-function Signin() {
+function Signin({ onSignIn }) {
+  const { values, handleChange, resetForm, errors, isValid } = useForm(SIGNIN_INITIAL_FORM_STATE, false);
+  const [signInError, setSignInError] = useState('');
+  const [isSignXRequestSent, setIsSignXRequestSent] = useState(false)
 
-  const { values, handleChange, resetFrom, errors, isValid } = useForm();
+  const emailConstrains = { required: true }
+  const passwordConstrains = { minLength: '6', maxLength: '20', required: true }
 
-  const emailConstrains = {required: true}
-  const passwordConstrains = {minLength: '3', maxLength: '30', required: true}
-
-  const serverError = null;
+  const handleErrorClear = () => {
+    setSignInError('');
+  }
 
   function handleSubmit(event) {
     event.preventDefault();
+    if (!isValid || isSignXRequestSent) {
+      return;
+    }
+    handleErrorClear();
+    setIsSignXRequestSent(true);
+    onSignIn(values.email, values.password)
+        .catch((error) => {
+          console.log(`%cCatch handleSignUp ${error}`, 'color: red');
+          setIsSignXRequestSent(false);
+          const errorMessage = error === '401' ? SIGNIN_ERROR_MESSAGES.unauthorized : SIGNIN_ERROR_MESSAGES.default;
+          setSignInError(errorMessage)
+        })
   }
 
+  const SignXBtnText = isSignXRequestSent ? '...Работаем над этим' : 'Войти'
+
   return (
-    <main className='signin'>
-      <ServiceTitle>Рады видеть!</ServiceTitle>
-      <form className='signin__form' onSubmit={handleSubmit}>
-        <FormInput
-          type='email' name='email' placeholder='E-mail'
-          value={values.email || 'pochta@yandex.ru'}
-          onChange={handleChange}
-          constrains={emailConstrains}
-          error={errors.email}
+      <main className='signin'>
+        <ServiceTitle>Рады видеть!</ServiceTitle>
+        <form className='signin__form' onSubmit={handleSubmit} noValidate>
+          <FormInput
+              type='email' name='email' placeholder='E-mail'
+              value={values.email}
+              onChange={handleChange}
+              constrains={emailConstrains}
+              error={errors.email}
+              disabled={isSignXRequestSent}
+          />
+          <FormInput
+              type='password' name='password' placeholder='Пароль'
+              value={values.password}
+              onChange={handleChange}
+              constrains={passwordConstrains}
+              error={errors.password}
+              disabled={isSignXRequestSent}
+          />
+          <ServerError error={signInError} className='signup__server-error' onErrorClear={handleErrorClear} />
+          <SignxButton className='signup__signx-button' disabled={isSignXRequestSent} isFormValid={isValid}>
+            {SignXBtnText}
+          </SignxButton>
+        </form>
+        <RedirectCall
+            className='signin__redirect-call'
+            message='Ещё не зарегистрированы?'
+            toText='Регистрация'
+            toPath='/signup'
         />
-        <FormInput
-          type='text' name='password' placeholder='Пароль'
-          value={values.password || '••••••••••••••'}
-          onChange={handleChange}
-          constrains={passwordConstrains}
-          error={errors.password}
-        />
-        <ServerError error={serverError} className='signin__server-error'/>
-        <SignxButton className='signup__signx-button' isFormValid={isValid}>Войти</SignxButton>
-      </form>
-      <RedirectCall
-        className='signin__redirect-call'
-        message='Ещё не зарегистрированы?'
-        toText='Регистрация'
-        toPath='/signup'
-      />
-    </main>
+      </main>
   )
 }
 

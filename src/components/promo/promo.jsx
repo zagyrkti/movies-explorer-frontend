@@ -7,7 +7,7 @@ function Promo() {
       <section className='promo'>
         <img className='promo__bg-image' src={bgImage} alt="логотип" />
         <h1 className='promo__title'>Учебный проект студента факультета Веб-разработки.</h1>
-        <NavTab/>
+        <NavTab />
       </section>
   )
 }

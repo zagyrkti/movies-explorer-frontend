@@ -5,11 +5,11 @@ import Portfolio from '../portfolio/portfolio';
 
 function AboutMe() {
   return (
-    <section className='about-me' id='student'>
-      <LandingSectionHeader>Студент</LandingSectionHeader>
-      <PersonData />
-      <Portfolio />
-    </section>
+      <section className='about-me' id='student'>
+        <LandingSectionHeader>Студент</LandingSectionHeader>
+        <PersonData />
+        <Portfolio />
+      </section>
   )
 }
 

@@ -33,6 +33,37 @@
     grid-area: more;
 }
 
+.movies__intro {
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 50vh;
+    z-index: 1;
+    padding: 20px;
+
+    font-size: 14px;
+
+    opacity: var(--opacity-secondary);
+}
+
+.movies__error {
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 50vh;
+    z-index: 1;
+    padding: 20px;
+
+    font-size: 14px;
+    color: #CF6679;
+
+    opacity: var(--opacity-secondary);
+}
+
 @media screen and (max-width: 1279px){
     .movies {
         padding: 0 calc(53711/500000 * 100vw - 67px);

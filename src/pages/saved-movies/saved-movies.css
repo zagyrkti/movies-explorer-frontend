@@ -33,6 +33,47 @@
     grid-area: placeholder;
 }
 
+.saved-movies__call {
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    height: 50vh;
+    display: flex;
+    box-sizing: border-box;
+    align-items: center;
+    justify-content: center;
+
+    opacity: var(--opacity-normal);
+    z-index: 1;
+
+    grid-area: cards;
+}
+
+.saved-movies__call-img {
+    height: 24px;
+}
+
+.saved-movies__call-text {
+    margin: 0 0 3px 0;
+}
+
+.saved-movies__error {
+    width: 100%;
+    padding: 0 15px 0 15px;
+    margin: 0;
+    height: 50vh;
+    display: flex;
+    box-sizing: border-box;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+
+    color: #CF6679;
+    z-index: 1;
+
+    grid-area: cards;
+}
+
 @media screen and (max-width: 1279px){
     .saved-movies {
         padding: 0 calc(53711/500000 * 100vw - 67px);

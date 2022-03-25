@@ -1,83 +1,143 @@
 import './movie-card.css';
-import { useState } from 'react';
+import { useContext, useEffect, useMemo, useState } from 'react';
 import { useLocation } from 'react-router-dom';
+import {
+  convertMinsToHrsMins,
+  isMovieBeatfilApiMovie,
+  searchForCopyInSaved,
+  getUnifiedProperties
+} from '../../utils/movies-auxiliary';
+import savedMoviesContext from '../../contexts/SavedMoviesContext';
+import { MOVIE_CARD_ERROR_MESSAGES } from '../../constants/constants';
 
-function
-MovieCard(props) {
-  const title = props.movieData.nameRU;
-  const imgUrl = `https://api.nomoreparties.co/${props.movieData.image.url}`;
-  const { description, duration } = props.movieData;
-  const { director, country, year } = props.movieData;
-  const { trailerLink } = props.movieData;
+function MovieCard({ movieData }) {
+  const location = useLocation();
+
+  const {
+    savedMoviesList,
+    handleSaveMovie,
+    handleDeleteMovie,
+    savedMoviesRequestState
+  } = useContext(savedMoviesContext)
 
   const [isFullDescriptionShown, setIsFullDescriptionShown] = useState(false);
-  const moreBtnText = isFullDescriptionShown ? 'СКРЫТЬ' : 'ПОКАЗАТЬ ПОЛНОСТЬЮ';
+  const [beatfilmApiMovieCopyInSaved, setBeatfilmApiMovieCopyInSaved] = useState(null);
+  const [movieSaveDeleteError, setMovieSaveDeleteError] = useState('');
+  const [isDeleteSaveRequestSent, setIsDeleteSaveRequestSent] = useState(false);
+
+  const isMovieBelongsToBeatfilmApi = useMemo(() => isMovieBeatfilApiMovie(movieData), [movieData]);
+
+  const [title, description, duration, director, country, year, imgUrl, trailerLink]
+      = getUnifiedProperties(movieData, isMovieBelongsToBeatfilmApi);
 
   const handleShowAll = () => {
     setIsFullDescriptionShown(!isFullDescriptionShown)
   }
 
-  const convertMinsToHrsMins = (mins) => {
-    let h = Math.floor(mins / 60);
-    let m = mins % 60;
-    m = m < 10 ? '0' + m : m;
-    return `${h}:${m}`;
+  const handleSaveMovieWrapper = () => {
+    if (isDeleteSaveRequestSent) {
+      return;
+    }
+    setMovieSaveDeleteError('');
+    setIsDeleteSaveRequestSent(true);
+    handleSaveMovie(movieData)
+        .catch((error) => {
+          console.log(`%cCatch ${error}`, 'color: red');
+          setMovieSaveDeleteError(MOVIE_CARD_ERROR_MESSAGES.save)
+        })
+        .finally(() => {
+          setIsDeleteSaveRequestSent(false);
+        })
   }
 
-  const formattedDuration = convertMinsToHrsMins(duration)
+  const handleDeleteMovieWrapper = () => {
+    if (isDeleteSaveRequestSent) {
+      return;
+    }
+    const movieId = isMovieBelongsToBeatfilmApi ? beatfilmApiMovieCopyInSaved._id : movieData._id;
+    setMovieSaveDeleteError('');
+    setIsDeleteSaveRequestSent(true);
+    handleDeleteMovie(movieId)
+        .catch((error) => {
+          console.log(`%cCatch ${error}`, 'color: red');
+          setMovieSaveDeleteError(MOVIE_CARD_ERROR_MESSAGES.delete)
+        })
+        .finally(() => {
+          setIsDeleteSaveRequestSent(false)
+        })
+  }
+
+  const calculateFavoriteButton = () => {
+    if (location.pathname === '/movies' && !beatfilmApiMovieCopyInSaved) {
+      return <button type='button'
+                     className='movie-card__favorite'
+                     onClick={handleSaveMovieWrapper} />
+    }
+    if (location.pathname === '/movies' && beatfilmApiMovieCopyInSaved) {
+      return <button type='button'
+                     className='movie-card__favorite movie-card__favorite_type_active'
+                     onClick={handleDeleteMovieWrapper} />
+    }
+    if (location.pathname === '/saved-movies') {
+      return <button type='button'
+                     className='movie-card__favorite movie-card__favorite_type_delete'
+                     onClick={handleDeleteMovieWrapper} />
+    }
+
+    return null;
+  }
+
+  const formattedDuration = convertMinsToHrsMins(duration);
+
+  const favoriteButton = calculateFavoriteButton();
+
+  const moreBtnText = isFullDescriptionShown ? 'СКРЫТЬ' : 'ПОКАЗАТЬ ПОЛНОСТЬЮ';
 
   const descriptionStyle = isFullDescriptionShown
-    ? 'movie-card__description movie-card__description_type_full'
-    : 'movie-card__description';
+      ? 'movie-card__description movie-card__description_type_full'
+      : 'movie-card__description';
 
   const cardInfoStyle = isFullDescriptionShown
-    ? 'movie-card__info movie-card__info_type_full'
-    : 'movie-card__info'
+      ? 'movie-card__info movie-card__info_type_full'
+      : 'movie-card__info'
 
-  const location = useLocation();
+  useEffect(() => {
+    if (isMovieBelongsToBeatfilmApi) {
+      setBeatfilmApiMovieCopyInSaved(searchForCopyInSaved(movieData, savedMoviesList))
+    }
+  }, [savedMoviesList])
 
-  const isSaved = props.movieData.id === 1 || props.movieData.id === 3;
-  let favoriteBtnStyle = '';
-
-  switch (location.pathname) {
-    case '/movies':
-      favoriteBtnStyle = isSaved ? 'movie-card__favorite movie-card__favorite_type_active' : 'movie-card__favorite';
-      break;
-    case '/saved-movies':
-      favoriteBtnStyle = 'movie-card__favorite movie-card__favorite_type_delete';
-      break;
-    default:
-      favoriteBtnStyle = 'movie-card__favorite';
-  }
+  const favoriteBtnGuard = !savedMoviesRequestState.failed && !savedMoviesRequestState.sent;
 
   return (
-    <li className='movie-card'>
-      <h3 className='movie-card__title'>{title}</h3>
-      <div className='movie-card__body'>
-        <a className='movie-card__img-wrapper' href={trailerLink} rel='noreferrer noopener' target='_blank' >
-          <img className='movie-card__img' src={imgUrl} alt={`картинка из ${title}`} />
-          <div className='movie-card__duration'>
-            <span className='movie-card__duration-text'>{formattedDuration}</span>
-          </div>
-        </a>
-        <div className={cardInfoStyle}>
-          <p className={descriptionStyle} lang='ru'>{description}</p>
-          <button type='button' className='movie-card__show-all'
-                  onClick={handleShowAll}>{moreBtnText}
-          </button>
-          <div className='movie-card__subsection'>
-            <div>
-              <p className='movie-card__additional-info'>{director}</p>
-              <div className='movie-card__sub-info'>
-                <span className='movie-card__additional-info'>{country}</span>
-                <span className='movie-card__additional-info'>{year}</span>
-              </div>
+      <li className='movie-card'>
+        <h3 className='movie-card__title'>{title}</h3>
+        <div className='movie-card__body'>
+          <a className='movie-card__img-wrapper' href={trailerLink} rel='noreferrer noopener' target='_blank'>
+            <img className='movie-card__img' src={imgUrl} alt={`картинка из ${title}`} />
+            <div className='movie-card__duration'>
+              <span className='movie-card__duration-text'>{formattedDuration}</span>
             </div>
-            <button type='button' className={favoriteBtnStyle} />
+          </a>
+          <div className={cardInfoStyle}>
+            <p className={descriptionStyle} lang='ru'>{description}</p>
+            <button type='button' className='movie-card__show-all'
+                    onClick={handleShowAll}>{moreBtnText}
+            </button>
+            <div className='movie-card__subsection'>
+              <div>
+                <p className='movie-card__additional-info'>{director}</p>
+                <div className='movie-card__sub-info'>
+                  <span className='movie-card__additional-info'>{country}</span>
+                  <span className='movie-card__additional-info'>{year}</span>
+                </div>
+              </div>
+              {favoriteBtnGuard && favoriteButton}
+            </div>
           </div>
-        </div>0.7826086956521739
-      </div>
-    </li>
+        </div>
+        {!!movieSaveDeleteError && <p className='movie-card__error'>{movieSaveDeleteError}</p>}
+      </li>
   )
 }
 
